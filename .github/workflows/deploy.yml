@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v2  # Sửa thành v2 để đảm bảo tương thích
       - uses: redkubes/docusaurus-deploy-action@v1
         with:
-          source-folder: website  # Thay đổi nếu thư mục nguồn khác
+          source-folder: docs  # Thay đổi nếu thư mục nguồn khác
           git-user: ${{ github.actor }}  # Sử dụng tên người dùng GitHub hiện tại
           git-password: ${{ secrets.MY_GITHUB_TOKEN }}  # Sử dụng token bí mật
           deployment-branch: gh-pages
