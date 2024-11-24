@@ -1,0 +1,40 @@
+name: Deploy Docusaurus
+
+on:
+  push:
+    branches:
+      - main  # Chỉ định nhánh chính để theo dõi
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "NTD"
+          git config --global user.email "ntdvlog1683@gmail.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        working-directory: ./docs
+        run: npm install
+
+      - name: Build Docusaurus
+        working-directory: ./docs
+        run: npm run build
+
+      - name: Deploy to main branch
+        run: |
+          git add -f ./docs/build
+          git commit -m "Deploy updated build to main"
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}

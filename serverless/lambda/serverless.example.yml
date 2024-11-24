@@ -1,0 +1,40 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: avg2003
+# "app" enables Serverless Framework Dashboard features and sharing them with other Services.
+app: hdbank
+# "service" is the name of this project. This will also be added to your AWS resource names.
+service: lambda
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  region: ap-southeast-1
+  environment:
+    OPENAI_API_KEY: sk-xxxxxxx
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 3001
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+  hello_name:
+    handler: handler.world
+    events:
+      - httpApi:
+          path: /hello-name
+          method: get
+  competition:
+    handler: handler.callOpenAI
+    events:
+      - httpApi:
+          path: /competition
+          method: post

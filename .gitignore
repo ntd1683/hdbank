@@ -1,0 +1,4 @@
+.env
+serverless/lambda/.env
+serverless/lambda/.env.example
+serverless/lambda/serverless.yml
