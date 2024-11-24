@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkhdbank=self.webpackChunkhdbank||[]).push([[9211],{6012:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/hdbank/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
