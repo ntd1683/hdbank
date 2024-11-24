@@ -86,7 +86,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'session1Sidebar',
             position: 'left',
-            label: 'Session 1',
+            label: 'Session',
           },
           {
             type: 'docSidebar',
