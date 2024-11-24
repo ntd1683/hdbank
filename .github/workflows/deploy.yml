@@ -1,15 +1,64 @@
-name: CI
+name: Deploy Docusaurus
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2  # Sửa thành v2 để đảm bảo tương thích
-      - uses: redkubes/docusaurus-deploy-action@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
         with:
-          source-folder: website  # Thay đổi nếu thư mục nguồn khác
-          git-user: ${{ github.actor }}  # Sử dụng tên người dùng GitHub hiện tại
-          git-password: ${{ secrets.MY_GITHUB_TOKEN }}  # Sử dụng token bí mật
-          deployment-branch: gh-pages
+          node-version: '14'
+
+      - name: Install dependencies
+        working-directory: ./docs  # Chỉ định thư mục docs
+        run: npm install
+
+      - name: Build Docusaurus
+        working-directory: ./docs  # Chỉ định thư mục docs
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.name: Deploy Docusaurus
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        working-directory: ./docs  # Chỉ định thư mục docs
+        run: npm install
+
+      - name: Build Docusaurus
+        working-directory: ./docs  # Chỉ định thư mục docs
+        run: npm run build
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/build  # Đường dẫn đến thư mục build trong docs
